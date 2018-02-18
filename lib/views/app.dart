@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:keeper/views/label_form.dart';
-import 'label_view.dart';
+import 'package:keeper/views/labels/label_form.dart';
+import 'package:keeper/views/labels/label_view.dart';
+import 'package:keeper/views/notes/notes_form.dart';
 
 class Keeper extends StatelessWidget {
 	@override
@@ -17,6 +18,7 @@ class Keeper extends StatelessWidget {
 				)
 			),
 			routes: <String, WidgetBuilder> {
+				NoteForm.routeName  : (BuildContext context) => new NoteForm(),
 				LabelView.routeName : (BuildContext context) => new LabelView(title: 'Notes'),
 				LabelForm.routeName : (BuildContext context) => new LabelForm()
 			}

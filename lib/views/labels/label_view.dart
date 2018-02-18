@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:keeper/views/keeper_drawer.dart';
-import 'mock_data.dart';
+import 'package:keeper/views/drawer/keeper_drawer.dart';
+import 'package:keeper/views/mock_data.dart';
+import 'package:keeper/views/notes/notes_form.dart';
 
 class LabelView extends StatefulWidget {
 	static final String routeName = '/';
@@ -42,6 +43,13 @@ class LabelViewState extends State<LabelView> {
 			body: new ListView(
 				children: _buildNotes(),
 			),
+			persistentFooterButtons: <Widget>[
+				new IconButton(
+					icon: const Icon(Icons.add),
+					onPressed: (){
+						Navigator.of(context).pushNamed(NoteForm.routeName);
+					})
+			],
 		);
 	}
 	

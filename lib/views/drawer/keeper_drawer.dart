@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:keeper/views/label_form.dart';
-import 'package:keeper/views/label_view.dart';
+import 'package:keeper/views/labels/label_form.dart';
+import 'package:keeper/views/labels/label_view.dart';
 
 const String _AccountName = 'Aravind Vemula';
 const String _AccountEmail = 'vemula.aravind336@gmail.com';
