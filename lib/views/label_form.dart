@@ -35,6 +35,7 @@ class LabelFormState extends State<LabelForm> {
 				backgroundColor: Colors.blueGrey.shade500,
 			),
 			body: new Container(
+				padding: const EdgeInsets.all(4.0),
 				child: new ListView(
 					children: labelList
 				)
@@ -56,86 +57,104 @@ class LabelFormState extends State<LabelForm> {
 	List<Widget> _buildLabels(int editIndex) {
 		labelList = [];
 		labelList.add(
-			new ListTile(
-				leading: new IconButton(
-					icon: const Icon(Icons.close),
-					color: Colors.grey,
-					onPressed: _clearText
-				),
-				title: new Theme(
-					data: new ThemeData(
-						primaryColor: Colors.blueGrey.shade500
-					), // Setting the underline with appBar color
-					child: new TextField(
-						controller: _controller,
-						style: new TextStyle(
-							fontSize: 18.0,
-							color: Colors.grey.shade700
+			new Row(
+				children: <Widget>[
+					new IconButton(
+						icon: const Icon(Icons.close),
+						color: Colors.grey.shade500,
+						onPressed: _clearText
+					),
+					new Expanded(
+						child: new Theme(
+							data: new ThemeData(
+								primaryColor: Colors.blueGrey.shade500
+							), // Setting the underline with appBar color
+							child: new TextField(
+								controller: _controller,
+								style: new TextStyle(
+									fontSize: 18.0,
+									color: Colors.grey.shade700
+								),
+								decoration: new InputDecoration(
+									errorText: error,
+									border: null,
+									labelText: 'Enter label Name',
+									labelStyle: new TextStyle(
+										color: Colors.blueGrey.shade700
+									),
+								),
+							)
 						),
-						decoration: new InputDecoration(
-							errorText: error,
-							labelText: 'Enter label Name',
-							labelStyle: new TextStyle(
-								color: Colors.blueGrey.shade700
-							),
-						),
-					)
-				),
-				trailing: new IconButton(
-					icon: const Icon(Icons.check),
-					color: Colors.green,
-					onPressed: _onSave
-				),
+					),
+					new IconButton(
+						icon: const Icon(Icons.check),
+						color: Colors.green,
+						onPressed: _onSave
+					),
+				],
 			)
 		);
+		
 		
 		for(int index=0; index<labels.length;index++) {
 			if(editIndex != null && editIndex == index){
 				if(updateError == null || updateError.isEmpty)
 					_updateController = new TextEditingController(text: labels[index]);
+				
 				labelList.add(
-					new ListTile(
-						leading: new IconButton(
-							icon: const Icon(Icons.close),
-							onPressed: () => _onCancelAt(index)
-						),
-						title: new Theme(
-							data: new ThemeData(
-								primaryColor: Colors.blueGrey.shade500
+					new Row(
+						children: <Widget>[
+							new IconButton(
+								icon: const Icon(Icons.close),
+								color: Colors.grey.shade500,
+								onPressed: () => _onCancelAt(index)
 							),
-							child: new TextField(
-								controller: _updateController,
-								autofocus: true,
-								style: new TextStyle(
-									fontSize: 18.0,
-									color: Colors.grey.shade700,
+							new Expanded(
+								child: new Theme(
+									data: new ThemeData(
+										primaryColor: Colors.blueGrey.shade500
+									),
+									child: new TextField(
+										controller: _updateController,
+										autofocus: true,
+										style: new TextStyle(
+											fontSize: 18.0,
+											color: Colors.grey.shade700,
+										),
+										decoration: new InputDecoration(
+											border: null,
+											errorText: updateError,
+											counterText: labels[index]
+										)
+									),
 								),
-								decoration: new InputDecoration(
-									border: null,
-									errorText: updateError,
-									counterText: labels[index]
-								)
 							),
-						),
-						trailing: new IconButton(
-							icon: const Icon(Icons.check),
-							color: Colors.green,
-							onPressed: () => _onUpdateAt(index)
-						),
+							new IconButton(
+								icon: const Icon(Icons.check),
+								color: Colors.green,
+								onPressed: () => _onUpdateAt(index)
+							),
+						],
 					)
 				);
 			}else{
 				labelList.add(
-					new ListTile(
-						leading: new IconButton(
-							icon: const Icon(Icons.delete),
-							onPressed: () => _removeLabelAt(index)
-						),
-						title: new Text(labels[index]),
-						trailing: new IconButton(
-							icon: const Icon(Icons.edit),
-							onPressed: () => _editLabelAt(index)
-						),
+					new Row(
+						children: <Widget>[
+							new IconButton(
+								icon: const Icon(Icons.delete),
+								color: Colors.grey.shade500,
+								onPressed: () => _removeLabelAt(index)
+							),
+							new Expanded(
+								child: new Text(labels[index])
+							),
+							new IconButton(
+								icon: const Icon(Icons.edit),
+								color: Colors.grey.shade500,
+								onPressed: () => _editLabelAt(index)
+							),
+						],
 					)
 				);
 			}
