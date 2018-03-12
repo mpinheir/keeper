@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:keeper/views/keeper_drawer.dart';
+import 'package:keeper/views/note_form.dart';
 import 'mock_data.dart';
 
 class LabelView extends StatefulWidget {
@@ -39,9 +40,24 @@ class LabelViewState extends State<LabelView> {
 					)
 				],
 			),
-			body: new ListView(
-				children: _buildNotes(),
+			body: new Container(
+				child: new ListView(
+					children: _buildNotes(),
+				),
 			),
+			bottomNavigationBar: new MaterialButton(
+				child: new Row(
+					children: <Widget>[
+						new Text(
+							'Take a note..',
+							style: new TextStyle(
+								color: Colors.grey.shade500
+							)
+						)
+					]
+				),
+				onPressed: _createNote
+			)
 		);
 	}
 	
@@ -82,5 +98,9 @@ class LabelViewState extends State<LabelView> {
 				],
 			),
 		);
+	}
+	
+	_createNote() {
+		Navigator.of(_scaffoldKey.currentContext).pushNamed(NoteForm.routeName);
 	}
 }
